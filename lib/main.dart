@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:habit_app/ui/auth/reset_password_page.dart';
+import 'package:habit_app/ui/auth/sign_up_page.dart';
 import 'package:habit_app/ui/colors.dart';
 import 'package:habit_app/ui/splash/splash_page.dart';
 import 'package:habit_app/utils/constants.dart';
@@ -16,12 +18,18 @@ class MyApp extends StatelessWidget {
       primary: AppColors.orange,
       onPrimary: AppColors.textColor,
       primaryContainer: AppColors.lightOrange,
+      outline: AppColors.lightText
     );
     final base = ThemeData.light().textTheme;
     return MaterialApp(
       title: Labels.appName,
       theme: ThemeData(
-        dividerColor: AppColors.lightText,
+        indicatorColor: AppColors.lightText,
+        dividerTheme: const DividerThemeData(
+          thickness: 1,
+          space: 0
+        ),
+        dividerColor: scheme.primaryContainer,
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.orange,
         colorScheme: scheme,
@@ -43,6 +51,14 @@ class MyApp extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(Colors.white),
             foregroundColor: MaterialStateProperty.all(scheme.onPrimary),
           ),
+        ),
+        cardTheme: CardTheme(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          color: scheme.surface,
+          margin: EdgeInsets.zero,
+          elevation: 0,
         ),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
@@ -90,13 +106,17 @@ class MyApp extends StatelessWidget {
                 fontFamily: Constants.manrope,
                 fontSize: 17,
               ),
+              bodyLarge: const TextStyle(
+                fontFamily: Constants.manrope,
+                fontSize: 16,
+              ),
             )
             .apply(
               bodyColor: AppColors.textColor,
               displayColor: AppColors.textColor,
             ),
       ),
-      home: const SplashPage(),
+      home: const ResetPasswordPage(),
     );
   }
 }

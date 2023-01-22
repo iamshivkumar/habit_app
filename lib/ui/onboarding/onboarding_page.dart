@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:habit_app/ui/components/big_button.dart';
 import 'package:habit_app/ui/onboarding/onboarding_data.dart';
+import 'package:habit_app/utils/assets.dart';
 import 'package:habit_app/utils/labels.dart';
 
 import '../auth/login_page.dart';
@@ -10,22 +12,22 @@ const List<OnboardingData> data = [
   OnboardingData(
       title: Labels.welcomeTo2,
       description: Labels.weCanHelpYou,
-      image: "assets/welcome.png",
+      image: Assets.welcome,
       isSvg: false),
   OnboardingData(
     title: Labels.createNewHabitEasily,
     description: Labels.weCanHelpYou,
-    image: "assets/habit.svg",
+    image: Assets.habit
   ),
   OnboardingData(
     title: Labels.keepTrackOf,
     description: Labels.weCanHelpYou,
-    image: "assets/progress.svg",
+    image: Assets.progress,
   ),
   OnboardingData(
     title: Labels.joinASupportive,
     description: Labels.weCanHelpYou,
-    image: "assets/community_support.svg",
+    image: Assets.communitySupport
   )
 ];
 
@@ -57,12 +59,7 @@ class OnboardingPage extends HookWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: index.value == data.length - 1
-              ? MaterialButton(
-                   color: scheme.primary,
-                   textColor: scheme.onPrimary,
-                  onPressed:done,
-                  child: const Text(Labels.getStarted),
-                )
+              ? BigButton(onPressed: done, text: Labels.getStarted)
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -80,7 +77,7 @@ class OnboardingPage extends HookWidget {
                             height: isSelected ? 17 : 12,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: isSelected ? theme.dividerColor : null,
+                              color: isSelected ? theme.indicatorColor : null,
                             ),
                             margin: const EdgeInsets.symmetric(horizontal: 4),
                             child: Center(

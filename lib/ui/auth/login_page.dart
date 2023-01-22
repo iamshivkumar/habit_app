@@ -1,5 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:habit_app/ui/auth/sign_up_page.dart';
+import 'package:habit_app/ui/components/big_button.dart';
+import 'package:habit_app/utils/assets.dart';
 import 'package:habit_app/utils/labels.dart';
 
 import '../components/bg.dart';
@@ -12,6 +16,7 @@ class LoginPage extends StatelessWidget {
     final theme = Theme.of(context);
     final style = theme.textTheme;
     final scheme = theme.colorScheme;
+    final media = MediaQuery.of(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -20,88 +25,157 @@ class LoginPage extends StatelessWidget {
             child: Image.asset("assets/bg.png"),
           ),
           Container(
+            height: media.size.height * 3 / 4,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.transparent,
+                  scheme.primaryContainer.withOpacity(0),
                   scheme.primaryContainer,
                 ],
                 stops: const [
-                  0.25,
-                  0.40,
+                  0.22,
+                  0.5,
                 ],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  Labels.welcomeTo2,
-                  textAlign: TextAlign.center,
-                  style: style.headlineMedium,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      "assets/google.svg",
-                      width: 24,
-                      height: 24,
-                    ),
-                    label: Text(Labels.continueWithGoogle),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                Labels.welcomeTo2,
+                textAlign: TextAlign.center,
+                style: style.headlineMedium,
+              ),
+              const SizedBox(height: 40),
+              ...[
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    Assets.google,
+                    width: 24,
+                    height: 24,
                   ),
+                  label: const Text(Labels.continueWithGoogle),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      "assets/facebook.svg",
-                      width: 24,
-                      height: 24,
-                    ),
-                    label: Text(Labels.continueWithFacebook),
+                const SizedBox(height: 8),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    Assets.facebook,
+                    width: 24,
+                    height: 24,
                   ),
+                  label: const Text(Labels.continueWithFacebook),
                 ),
-                Container(
-                  color: theme.cardColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(Labels.logInWithEmail),
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: Labels.email,
-                              prefixIcon: Icon(Icons.email_outlined),
-                            ),
-                             
-                          ),
-                          SizedBox(height: 8),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: Labels.password,
-                              prefixIcon: Icon(Icons.lock_outline),
-                            ),
-                          
-                          ),
-                        ],
+              ]
+                  .map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: e,
+                    ),
+                  )
+                  .toList(),
+              const SizedBox(height: 24),
+              Container(
+                color: theme.cardColor,
+                child: SafeArea(
+                  top: false,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 12),
+                        child: Text(
+                          Labels.logInWithEmail,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
+                      Divider(
+                        height: 0.5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            TextFormField(
+                              style: TextStyle(
+                                color: scheme.primary,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: Labels.email,
+                                prefixIcon: Icon(Icons.email_outlined),
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            TextFormField(
+                              style: TextStyle(
+                                color: scheme.primary,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: Labels.password,
+                                prefixIcon: Icon(Icons.lock_outline),
+                                suffix: Text(
+                                  Labels.show,
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            BigButton(
+                              onPressed: () {},
+                              text: Labels.login,
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              Labels.forgotPassword,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "${Labels.dontHaveAnAccount} ",
+                                style: style.bodyText2,
+                                children: [
+                                  TextSpan(
+                                    text: Labels.signUp,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SignUpPage(),
+                                          ),
+                                        );
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
-          )
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
