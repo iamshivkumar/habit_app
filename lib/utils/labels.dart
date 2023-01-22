@@ -36,9 +36,10 @@ class Labels {
   static const List<String> weCanHelpYou = [
     "We can ",
     "help you ",
-    "to be a better version of ",
+    "to be a better\nversion of ",
     "yourself."
   ];
 
-  static const String welcomeTo = "WELCOME TO\nMonumental habits";
+  static const String welcomeTo = "WELCOME TO\nMonumental\nhabits";
+  static const String welcomeTo2 = "WELCOME TO\nMonumental habits";
 }
