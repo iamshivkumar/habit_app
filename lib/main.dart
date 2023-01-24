@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:habit_app/ui/auth/login_page.dart';
 import 'package:habit_app/ui/auth/reset_password_page.dart';
 import 'package:habit_app/ui/auth/sign_up_page.dart';
 import 'package:habit_app/ui/colors.dart';
+import 'package:habit_app/ui/home/home_page.dart';
 import 'package:habit_app/ui/splash/splash_page.dart';
 import 'package:habit_app/utils/constants.dart';
 import 'package:habit_app/utils/labels.dart';
@@ -32,6 +34,10 @@ class MyApp extends StatelessWidget {
         dividerColor: scheme.primaryContainer,
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.orange,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: scheme.primary,
+          foregroundColor: scheme.onPrimary,
+        ),
         colorScheme: scheme,
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
@@ -114,9 +120,13 @@ class MyApp extends StatelessWidget {
             .apply(
               bodyColor: AppColors.textColor,
               displayColor: AppColors.textColor,
+            ).copyWith(
+              bodySmall: TextStyle(
+                color: AppColors.lightText,
+              )
             ),
       ),
-      home: const ResetPasswordPage(),
+      home: const HomePage(),
     );
   }
 }

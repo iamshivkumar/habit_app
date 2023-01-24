@@ -41,140 +41,150 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                Labels.welcomeTo2,
-                textAlign: TextAlign.center,
-                style: style.headlineMedium,
-              ),
-              const SizedBox(height: 40),
-              ...[
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    Assets.google,
-                    width: 24,
-                    height: 24,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    Labels.welcomeTo2,
+                    textAlign: TextAlign.center,
+                    style: style.headlineMedium,
                   ),
-                  label: const Text(Labels.continueWithGoogle),
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    Assets.facebook,
-                    width: 24,
-                    height: 24,
-                  ),
-                  label: const Text(Labels.continueWithFacebook),
-                ),
-              ]
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: e,
+                  const SizedBox(height: 40),
+                  ...[
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: SvgPicture.asset(
+                        Assets.google,
+                        width: 24,
+                        height: 24,
+                      ),
+                      label: const Text(Labels.continueWithGoogle),
                     ),
-                  )
-                  .toList(),
-              const SizedBox(height: 24),
-              Container(
-                color: theme.cardColor,
-                child: SafeArea(
-                  top: false,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 12),
-                        child: Text(
-                          Labels.logInWithEmail,
-                          textAlign: TextAlign.center,
-                        ),
+                    const SizedBox(height: 8),
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: SvgPicture.asset(
+                        Assets.facebook,
+                        width: 24,
+                        height: 24,
                       ),
-                      Divider(
-                        height: 0.5,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            TextFormField(
-                              style: TextStyle(
-                                color: scheme.primary,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: Labels.email,
-                                prefixIcon: Icon(Icons.email_outlined),
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            TextFormField(
-                              style: TextStyle(
-                                color: scheme.primary,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: Labels.password,
-                                prefixIcon: Icon(Icons.lock_outline),
-                                suffix: Text(
-                                  Labels.show,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            BigButton(
-                              onPressed: () {},
-                              text: Labels.login,
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              Labels.forgotPassword,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                text: "${Labels.dontHaveAnAccount} ",
-                                style: style.bodyText2,
-                                children: [
-                                  TextSpan(
-                                    text: Labels.signUp,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SignUpPage(),
-                                          ),
-                                        );
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                      label: const Text(Labels.continueWithFacebook),
+                    ),
+                  ]
+                      .map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: e,
                         ),
                       )
-                    ],
-                  ),
-                ),
-              )
-            ],
+                      .toList(),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: theme.cardColor,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
+                    ),
+                    child: SafeArea(
+                      top: false,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            child: Text(
+                              Labels.logInWithEmail,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Divider(
+                            height: 0.5,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                TextFormField(
+                                  style: TextStyle(
+                                    color: scheme.primary,
+                                  ),
+                                  decoration: InputDecoration(
+                                    hintText: Labels.email,
+                                    prefixIcon: Icon(Icons.email_outlined),
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                TextFormField(
+                                  style: TextStyle(
+                                    color: scheme.primary,
+                                  ),
+                                  decoration: InputDecoration(
+                                    hintText: Labels.password,
+                                    prefixIcon: Icon(Icons.lock_outline),
+                                    suffix: Text(
+                                      Labels.show,
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                BigButton(
+                                  onPressed: () {},
+                                  text: Labels.login,
+                                ),
+                                const SizedBox(height: 12),
+                                Text(
+                                  Labels.forgotPassword,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    text: "${Labels.dontHaveAnAccount} ",
+                                    style: style.bodyText2,
+                                    children: [
+                                      TextSpan(
+                                        text: Labels.signUp,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const SignUpPage(),
+                                              ),
+                                            );
+                                          },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       ),

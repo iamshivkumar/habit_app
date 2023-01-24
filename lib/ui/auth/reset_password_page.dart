@@ -23,35 +23,27 @@ class ResetPasswordPage extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.centerLeft,
-                child: Container(
-                  height: 44,
-                  width: 44,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: scheme.onPrimary.withOpacity(0.1),
-                  ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(32),
-                    onTap: () {
-                      // Navigator.pop(context);
-                    },
-                    child: const Center(
-                      child: Icon(Icons.arrow_back_rounded),
-                    ),
-                  ),
+                child: CircleButton(
+                  child: Center(
+          child: Icon(Icons.arrow_back_rounded),
+        ),
+                  onPressed: () {},
                 ),
               ),
-              const SizedBox(height: 36),
+              Spacer(),
               Text(
                 Labels.forgotYourPassword,
                 style: style.headlineSmall,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 40),
-              SvgPicture.asset(
-                Assets.forgot,
+              Spacer(),
+              Expanded(
+                flex: 4,
+                child: SvgPicture.asset(
+                  Assets.forgot,
+                ),
               ),
+              const Spacer(),
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -82,7 +74,7 @@ class ResetPasswordPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -102,6 +94,38 @@ class ResetPasswordPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CircleButton extends StatelessWidget {
+  const CircleButton({
+    Key? key,
+    required this.child,
+    this.onPressed
+  }) : super(key: key);
+
+  final Widget child;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+        final theme = Theme.of(context);
+    final style = theme.textTheme;
+    final scheme = theme.colorScheme;
+    return Container(
+      height: 44,
+      width: 44,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: scheme.onPrimary.withOpacity(0.1),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(32),
+        onTap: onPressed,
+        child: child
       ),
     );
   }
