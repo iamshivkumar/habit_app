@@ -1,13 +1,26 @@
 class Labels {
   static const String alreadyHaveAnAccount = "Already have an account?";
+  static const String addReminder = "Add Reminder";
+  static const String addReminders = "Add Reminders";
+    static const am = "am";
+  
+  static const String analytics = "Analytics";
   static const String anonymous = "- anonymous";
   static const String appName = 'Monumental habits';
+  static const String averageEasinessScore = "Average Easiness Score";
+  static const String cancel = "Cancel";
+  static const String completionRate = "Completion Rate";
+  static const String congratulations = "Congratulations!";
+  static const String continue_ = "Continue";
   static const String createAccount = "Create Account";
   static const String createYourAccount = "Create your account";
+  static const String createNewHabit = "Create New Habit";
   static const String createNewHabitEasily = "CREATE NEW\nHABIT EASILY";
   static const String continueWithFacebook = "Continue with Facebook";
+  static const String currentStreak = "Current Streak";
   static const String custom = "Custom";
   static const String continueWithGoogle = "Continue with Google";
+  static  String days(int value) => "$value Days";
   static const String dontHaveAnAccount = "Don’t have an account?";
   static const String email = "Email";
   static const String emailMeAbout = "Email me about special pricing and more";
@@ -27,8 +40,11 @@ class Labels {
 
   static const String keepMeSignedIn = "Keep me signed in";
   static const String keepTrackOf = "KEEP TRACK OF YOUR\nPROGRESS";
+  static const String longestStreak = "Longest Streak";
   static const String login = "Login";
   static const String logInWithEmail = "Log in with email";
+  static const String markHabitAsComplete = "Mark Habit as Complete";
+  static const String markHabitAsMissed = "Mark Habit as Missed";
   static const String name = "Name";
   static const String newHabit = "New Habit";
   static const String next = "Next";
@@ -37,8 +53,14 @@ class Labels {
   static const String on = "On";
   static const String orSignInWith = "Or sign in with";
   static const String password = "Password";
+  static  String percentage(int value) => "$value %";
+  static const String pm = "pm";
+  static const String readABook = "Read A Book";
   static const String rememberPassword = "Remember password?";
   static const String reminder = "Reminder";
+  static const String reminders = "Reminders: 5:00 am";
+  static const String repeatEveryday = "Repeat everyday";
+  static const String save = "Save";
   static const String sendResetLink = "Send Reset Link";
   static const String signIn = "Sign In";
   static const String signUp = "Sign up";

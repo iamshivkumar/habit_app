@@ -3,6 +3,7 @@ import 'package:habit_app/ui/auth/login_page.dart';
 import 'package:habit_app/ui/auth/reset_password_page.dart';
 import 'package:habit_app/ui/auth/sign_up_page.dart';
 import 'package:habit_app/ui/colors.dart';
+import 'package:habit_app/ui/dashboard/dashboard.dart';
 import 'package:habit_app/ui/home/home_page.dart';
 import 'package:habit_app/ui/splash/splash_page.dart';
 import 'package:habit_app/utils/constants.dart';
@@ -17,20 +18,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = ColorScheme.fromSeed(seedColor: AppColors.orange).copyWith(
-      primary: AppColors.orange,
-      onPrimary: AppColors.textColor,
-      primaryContainer: AppColors.lightOrange,
-      outline: AppColors.lightText
-    );
+        primary: AppColors.orange,
+        onPrimary: AppColors.textColor,
+        primaryContainer: AppColors.lightOrange,
+        outline: AppColors.lightText);
     final base = ThemeData.light().textTheme;
     return MaterialApp(
       title: Labels.appName,
       theme: ThemeData(
         indicatorColor: AppColors.lightText,
-        dividerTheme: const DividerThemeData(
-          thickness: 1,
-          space: 0
-        ),
+        dividerTheme: const DividerThemeData(thickness: 1, space: 0),
         dividerColor: scheme.primaryContainer,
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.orange,
@@ -67,6 +64,9 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
         inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(
+            color: AppColors.lightText
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
@@ -120,13 +120,13 @@ class MyApp extends StatelessWidget {
             .apply(
               bodyColor: AppColors.textColor,
               displayColor: AppColors.textColor,
-            ).copyWith(
-              bodySmall: TextStyle(
-                color: AppColors.lightText,
-              )
-            ),
+            )
+            .copyWith(
+                bodySmall: TextStyle(
+              color: AppColors.lightText,
+            )),
       ),
-      home: const HomePage(),
+      home: const Dashboard(),
     );
   }
 }

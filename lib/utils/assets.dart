@@ -7,7 +7,7 @@ class Assets {
   static const google = "assets/google.svg";
   static const facebook = "assets/facebook.svg";
   static const home = "assets/home.svg";
-  static const homeBg = "assets/home_bg.svg";
+  static const homeBg = "assets/home-bg.png";
   static const image = "assets/image.png";
 
   static const communitySupport = "assets/community_support.svg";
@@ -19,7 +19,9 @@ class Assets {
   static const progress = "assets/progress.svg";
   static const reader = "assets/reader.svg";
   static const settings = "assets/settings.svg";
+  static const teepee = "assets/teepee-swirly.png";
   static const welcome = "assets/welcome.png";
   static const forgot = "assets/forgot.svg";
   static const addIcon = "assets/add_icon.svg";
+  static const bell = "assets/bell.svg";
 }
