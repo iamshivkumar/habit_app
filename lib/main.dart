@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
         primary: AppColors.orange,
         onPrimary: AppColors.textColor,
         primaryContainer: AppColors.lightOrange,
-        outline: AppColors.lightText);
+        outline: AppColors.lightText,
+        surfaceVariant: AppColors.gray);
     final base = ThemeData.light().textTheme;
     return MaterialApp(
       title: Labels.appName,
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
         ),
         inputDecorationTheme: InputDecorationTheme(
           hintStyle: TextStyle(
-            color: AppColors.lightText
+            color: AppColors.lightText,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
@@ -122,11 +123,23 @@ class MyApp extends StatelessWidget {
               displayColor: AppColors.textColor,
             )
             .copyWith(
-                bodySmall: TextStyle(
-              color: AppColors.lightText,
-            )),
+              bodySmall: const TextStyle(
+                color: AppColors.lightText,
+              ),
+            ),
       ),
       home: const Dashboard(),
     );
   }
 }
+
+extension CustomStyles on TextTheme {
+  TextStyle? get specialTitle => titleMedium?.copyWith(fontSize: 18);
+}
+
+// class AppStyles {
+//  static TextStyle get title => const TextStyle(
+//         fontSize: 18,
+//         fontWeight: FontWeight.bold,
+//       );
+// }

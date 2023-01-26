@@ -67,7 +67,7 @@ class Labels {
   static const String skip = "Skip";
   static const String show = "Show";
   static const String startThisHabit = "Start this habit";
-  static const String ullamco = "ullamco laboris nisi ut aliquip ex ea commodo consequat dolore.";
+  static const String ullamco = "ullamco laboris nisi ut aliquip ex ea commodo\nconsequat dolore.";
   static const List<String> weCanHelpYou = [
     "We can ",
     "help you ",

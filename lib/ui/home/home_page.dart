@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:habit_app/ui/auth/reset_password_page.dart';
 import 'package:habit_app/ui/components/custom_scaffold.dart';
 import 'package:habit_app/ui/components/status_button.dart';
+import 'package:habit_app/ui/habits/habit_page.dart';
 import 'package:habit_app/ui/home/widgets/half_cliper.dart';
 import 'package:habit_app/utils/assets.dart';
 import 'package:habit_app/utils/formats.dart';
@@ -91,20 +92,30 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 12),
-                      Container(
-                        height: 74,
-                        decoration: BoxDecoration(
-                          color: scheme.surface,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            bottomLeft: Radius.circular(12),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const HabbitPage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 74,
+                          decoration: BoxDecoration(
+                            color: scheme.surface,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            ),
                           ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "Read A Book",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                          child: const Center(
+                            child: Text(
+                              "Read A Book",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -128,8 +139,7 @@ class HomePage extends StatelessWidget {
                             })
                                 .map(
                                   (e) => Padding(
-                                    padding:
-                                        const EdgeInsets.only(right: 6),
+                                    padding: const EdgeInsets.only(right: 6),
                                     child: Card(
                                       child: SizedBox(
                                         height: 50,
@@ -140,8 +150,7 @@ class HomePage extends StatelessWidget {
                                           children: [
                                             Text(
                                               e.labelDay,
-                                              style:
-                                                  style.bodySmall!.copyWith(
+                                              style: style.bodySmall!.copyWith(
                                                 fontSize: 10,
                                               ),
                                             ),
@@ -166,10 +175,8 @@ class HomePage extends StatelessWidget {
                           height: 74,
                           padding: EdgeInsets.only(left: 16),
                           child: Row(
-                            children: List.generate(
-                              7,
-                              (index) => StatusButton()
-                            ),
+                            children:
+                                List.generate(7, (index) => StatusButton()),
                           ),
                         ),
                       ],
