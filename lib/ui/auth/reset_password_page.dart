@@ -5,6 +5,7 @@ import 'package:habit_app/ui/components/big_button.dart';
 import 'package:habit_app/utils/assets.dart';
 
 import '../../utils/labels.dart';
+import '../components/circle_button.dart';
 
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({super.key});
@@ -24,13 +25,13 @@ class ResetPasswordPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: CircleButton(
-                  child: Center(
-          child: Icon(Icons.arrow_back_rounded),
-        ),
+                  child: const Center(
+                    child: Icon(Icons.arrow_back_rounded),
+                  ),
                   onPressed: () {},
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 Labels.forgotYourPassword,
                 style: style.headlineSmall,
@@ -94,38 +95,6 @@ class ResetPasswordPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CircleButton extends StatelessWidget {
-  const CircleButton({
-    Key? key,
-    required this.child,
-    this.onPressed
-  }) : super(key: key);
-
-  final Widget child;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-        final theme = Theme.of(context);
-    final style = theme.textTheme;
-    final scheme = theme.colorScheme;
-    return Container(
-      height: 44,
-      width: 44,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: scheme.onPrimary.withOpacity(0.1),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(32),
-        onTap: onPressed,
-        child: child
       ),
     );
   }

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../home/widgets/half_cliper.dart';
 
+
+
+
 class StatusButton extends StatelessWidget {
-  const StatusButton({super.key, this.size = 54});
+  const StatusButton({super.key, this.size});
   
-  final double size;
+  final double? size;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -14,17 +17,16 @@ class StatusButton extends StatelessWidget {
     return Container(
       height: size,
       width: size,
-      margin: EdgeInsets.only(right: 2),
+      margin: const EdgeInsets.only(right: 2),
       decoration: BoxDecoration(
         color: scheme.primary.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Center(
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
         child: ClipPath(
           clipper: HalfCliper(),
           child: Container(
-            height: size - 4,
-            width: size - 4,
             decoration: BoxDecoration(
               color: scheme.primary,
               borderRadius: BorderRadius.circular(12),

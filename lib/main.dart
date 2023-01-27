@@ -18,11 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = ColorScheme.fromSeed(seedColor: AppColors.orange).copyWith(
-        primary: AppColors.orange,
-        onPrimary: AppColors.textColor,
-        primaryContainer: AppColors.lightOrange,
-        outline: AppColors.lightText,
-        surfaceVariant: AppColors.gray);
+      primary: AppColors.orange,
+      onPrimary: AppColors.textColor,
+      primaryContainer: AppColors.lightOrange,
+      outline: AppColors.lightText,
+      surfaceVariant: AppColors.gray,
+    );
     final base = ThemeData.light().textTheme;
     return MaterialApp(
       title: Labels.appName,
@@ -135,6 +136,7 @@ class MyApp extends StatelessWidget {
 
 extension CustomStyles on TextTheme {
   TextStyle? get specialTitle => titleMedium?.copyWith(fontSize: 18);
+  TextStyle? get titleMedium2 => bodySmall?.copyWith(fontSize: 16);
 }
 
 // class AppStyles {

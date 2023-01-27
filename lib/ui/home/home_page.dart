@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:habit_app/ui/auth/reset_password_page.dart';
 import 'package:habit_app/ui/components/custom_scaffold.dart';
 import 'package:habit_app/ui/components/status_button.dart';
 import 'package:habit_app/ui/habits/habit_page.dart';
-import 'package:habit_app/ui/home/widgets/half_cliper.dart';
 import 'package:habit_app/utils/assets.dart';
 import 'package:habit_app/utils/formats.dart';
-import 'package:intl/intl.dart';
+import 'package:habit_app/utils/utils.dart';
 
 import '../../utils/labels.dart';
-import '../components/home_bg.dart';
+import '../components/circle_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -133,10 +131,7 @@ class HomePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 18),
                           child: Row(
-                            children: List.generate(7, (index) {
-                              return DateTime.now().add(Duration(
-                                  days: index - DateTime.now().weekday));
-                            })
+                            children: Utils.weekDays
                                 .map(
                                   (e) => Padding(
                                     padding: const EdgeInsets.only(right: 6),
@@ -173,10 +168,14 @@ class HomePage extends StatelessWidget {
                             color: scheme.surface,
                           ),
                           height: 74,
-                          padding: EdgeInsets.only(left: 16),
+                          padding: const EdgeInsets.only(left: 16),
                           child: Row(
-                            children:
-                                List.generate(7, (index) => StatusButton()),
+                            children: List.generate(
+                              7,
+                              (index) => const StatusButton(
+                                size: 54,
+                              ),
+                            ),
                           ),
                         ),
                       ],

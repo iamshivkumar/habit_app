@@ -25,6 +25,7 @@ class Assets {
   static const reader = "assets/reader.svg";
   static const settings = "assets/settings.svg";
   static const teepee = "assets/teepee-swirly.png";
+  static const teepee2 = "assets/teepee-swirly-2.png";
   static const welcome = "assets/welcome.png";
   static const forgot = "assets/forgot.svg";
   static const addIcon = "assets/add_icon.svg";
