@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BigButton extends StatelessWidget {
   const BigButton({super.key, required this.onPressed, required this.text, this.stretch = false,this.elevation});
   
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String text;
   final bool stretch;
   final double? elevation;
