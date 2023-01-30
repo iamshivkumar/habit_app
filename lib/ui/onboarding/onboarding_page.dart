@@ -1,11 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:habit_app/root.dart';
 import 'package:habit_app/ui/components/big_button.dart';
 import 'package:habit_app/ui/onboarding/onboarding_data.dart';
 import 'package:habit_app/utils/assets.dart';
 import 'package:habit_app/utils/labels.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../core/providers/cache_provider.dart';
+import '../../utils/constants.dart';
 import '../auth/login_page.dart';
 
 const List<OnboardingData> data = [
@@ -15,27 +21,25 @@ const List<OnboardingData> data = [
       image: Assets.welcome,
       isSvg: false),
   OnboardingData(
-    title: Labels.createNewHabitEasily,
-    description: Labels.weCanHelpYou,
-    image: Assets.habit
-  ),
+      title: Labels.createNewHabitEasily,
+      description: Labels.weCanHelpYou,
+      image: Assets.habit),
   OnboardingData(
     title: Labels.keepTrackOf,
     description: Labels.weCanHelpYou,
     image: Assets.progress,
   ),
   OnboardingData(
-    title: Labels.joinASupportive,
-    description: Labels.weCanHelpYou,
-    image: Assets.communitySupport
-  )
+      title: Labels.joinASupportive,
+      description: Labels.weCanHelpYou,
+      image: Assets.communitySupport)
 ];
 
-class OnboardingPage extends HookWidget {
+class OnboardingPage extends HookConsumerWidget {
   const OnboardingPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final style = theme.textTheme;
     final scheme = theme.colorScheme;
@@ -44,14 +48,11 @@ class OnboardingPage extends HookWidget {
     controller.addListener(() {
       index.value = controller.index;
     });
-    
-    void done()async{
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ),
-      );
+
+    void done() async {
+      final cache = await ref.read(cacheProvider.future);
+      await cache.setBool(Constants.seen, true);
+      Navigator.pushNamedAndRemoveUntil(context, Root.route, (route) => false);
     }
 
     return Scaffold(

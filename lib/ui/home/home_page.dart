@@ -1,20 +1,25 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:habit_app/root.dart';
+import 'package:habit_app/ui/auth/providers/auth_provider.dart';
 import 'package:habit_app/ui/components/custom_scaffold.dart';
 import 'package:habit_app/ui/components/status_button.dart';
 import 'package:habit_app/ui/habits/habit_page.dart';
 import 'package:habit_app/utils/assets.dart';
 import 'package:habit_app/utils/formats.dart';
 import 'package:habit_app/utils/utils.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../utils/labels.dart';
 import '../components/circle_button.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final theme = Theme.of(context);
     final style = theme.textTheme;
     final scheme = theme.colorScheme;
@@ -22,10 +27,16 @@ class HomePage extends StatelessWidget {
       title: Labels.homepage,
       leading: CircleButton(
         child: Center(
-          child: SvgPicture.asset(
-            Assets.menuIcon,
-            height: 24,
-            width: 24,
+          child: GestureDetector(
+            onTap: () async {
+             await ref.read(authProvider).signOut();
+             Navigator.pushNamedAndRemoveUntil(context, Root.route, (route) => false);
+            },
+            child: SvgPicture.asset(
+              Assets.menuIcon,
+              height: 24,
+              width: 24,
+            ),
           ),
         ),
       ),

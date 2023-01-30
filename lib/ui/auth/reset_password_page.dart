@@ -9,7 +9,8 @@ import '../components/circle_button.dart';
 
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({super.key});
-
+  
+  static const route = "/reset-password";
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

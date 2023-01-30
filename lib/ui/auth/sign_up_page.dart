@@ -1,18 +1,30 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:habit_app/root.dart';
+import 'package:habit_app/ui/components/app_snackbar.dart';
 import 'package:habit_app/ui/components/big_button.dart';
 import 'package:habit_app/utils/assets.dart';
 import 'package:habit_app/utils/labels.dart';
+import 'package:habit_app/utils/validators.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SignUpPage extends StatelessWidget {
+import 'providers/auth_provider.dart';
+
+class SignUpPage extends HookConsumerWidget {
   const SignUpPage({super.key});
 
+  static const route = "/sign-up";
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final style = theme.textTheme;
     final scheme = theme.colorScheme;
+    final model = ref.read(authProvider);
+    final formKey = useRef(GlobalKey<FormState>());
     return Theme(
       data: theme.copyWith(
         inputDecorationTheme: theme.inputDecorationTheme.copyWith(
@@ -66,10 +78,27 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                BigButton(
-                  stretch: true,
-                  onPressed: () {},
-                  text: Labels.createAccount,
+                Consumer(
+                  builder: (context, ref, child) {
+                    ref.watch(authProvider.select((value) => value.enabled));
+                    return BigButton(
+                      stretch: true,
+                      onPressed: model.enabled
+                          ? () async {
+                              if (formKey.value.currentState!.validate()) {
+                                try {
+                                  await model.register();
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context, Root.route, (route) => false);
+                                } catch (e) {
+                                  AppSnackBar.error(context, e);
+                                }
+                              }
+                            }
+                          : null,
+                      text: Labels.createAccount,
+                    );
+                  },
                 ),
                 SizedBox(
                   height: 16,
@@ -164,50 +193,66 @@ class SignUpPage extends StatelessWidget {
           bottom: false,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                Expanded(
-                  child: SvgPicture.asset(Assets.createYourAccount),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  Labels.createYourAccount,
-                  style: style.headlineSmall,
-                ),
-                const SizedBox(height: 32),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
-                    hintText: Labels.name,
+            child: Form(
+              key: formKey.value,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SvgPicture.asset(Assets.createYourAccount),
                   ),
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
-                  style: TextStyle(
-                    color: scheme.primary,
+                  const SizedBox(height: 20),
+                  Text(
+                    Labels.createYourAccount,
+                    style: style.headlineSmall,
                   ),
-                  decoration: const InputDecoration(
-                    hintText: Labels.email,
-                    prefixIcon: Icon(Icons.email_outlined),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
-                  style: TextStyle(
-                    color: scheme.primary,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: Labels.password,
-                    prefixIcon: Icon(Icons.lock_outline),
-                    suffix: Text(
-                      Labels.show,
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.w500),
+                  const SizedBox(height: 32),
+                  TextFormField(
+                    style: TextStyle(
+                      color: scheme.primary,
                     ),
+                    textCapitalization: TextCapitalization.words,
+                    initialValue: model.name,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.person_outline_outlined),
+                      hintText: Labels.name,
+                    ),
+                    onChanged: (value) => model.name = value,
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.emailAddress,
+                    initialValue: model.email,
+                    style: TextStyle(
+                      color: scheme.primary,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: Labels.email,
+                      prefixIcon: Icon(Icons.email_outlined),
+                    ),
+                    onChanged: (value) => model.email = value,
+                    validator: Validators.validateEmail,
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    initialValue: model.password,
+                    style: TextStyle(
+                      color: scheme.primary,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: Labels.password,
+                      prefixIcon: Icon(Icons.lock_outline),
+                      suffix: Text(
+                        Labels.show,
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    onChanged: (value) => model.password = value,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

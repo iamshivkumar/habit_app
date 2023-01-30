@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:habit_app/core/providers/cache_provider.dart';
+import 'package:habit_app/root.dart';
+import 'package:habit_app/ui/auth/providers/auth_provider.dart';
 import 'package:habit_app/utils/labels.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../components/bg.dart';
-import '../onboarding/onboarding_page.dart';
 
-class SplashPage extends StatefulWidget {
+
+
+
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
+  static const route = '/';
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
-  @override
+class _SplashPageState extends ConsumerState<SplashPage> {
+
   void initState() {
-    Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const OnboardingPage(),
-        ),
-      );
-    });
+    init();
     super.initState();
+  }
+
+  void init()async{
+   await ref.read(cacheProvider.future);
+   ref.read(userProvider);
+   // ignore: use_build_context_synchronously
+   Navigator.pushNamedAndRemoveUntil(context, Root.route, (route) => false);
   }
 
   @override
@@ -48,4 +55,4 @@ class _SplashPageState extends State<SplashPage> {
       ),
     );
   }
-}
+  }

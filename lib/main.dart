@@ -1,4 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:habit_app/firebase_options.dart';
+import 'package:habit_app/router.dart';
 import 'package:habit_app/ui/auth/login_page.dart';
 import 'package:habit_app/ui/auth/reset_password_page.dart';
 import 'package:habit_app/ui/auth/sign_up_page.dart';
@@ -8,9 +11,12 @@ import 'package:habit_app/ui/home/home_page.dart';
 import 'package:habit_app/ui/splash/splash_page.dart';
 import 'package:habit_app/utils/constants.dart';
 import 'package:habit_app/utils/labels.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -129,7 +135,8 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: const Dashboard(),
+      initialRoute: SplashPage.route,
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }

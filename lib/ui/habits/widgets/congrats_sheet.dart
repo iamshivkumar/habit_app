@@ -55,7 +55,7 @@ class CongratsSheet extends StatelessWidget {
                     color: scheme.primaryContainer,
                     textColor: scheme.onPrimary,
                     onPressed: () {},
-                    child: Text(Labels.continue_),
+                    child: const Text(Labels.continue_),
                   ),
                 ],
               ),

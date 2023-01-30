@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "607142404965",
+    "project_id": "habbit-aed19",
+    "storage_bucket": "habbit-aed19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607142404965:android:ade30cf9b792515079378c",
+        "android_client_info": {
+          "package_name": "com.habbit.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607142404965-7v0kngd3o3cu1skogg2b440aobsjabkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClDmhqQD7wTXF_yviA26nBvLcKQZl0Grc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607142404965-7v0kngd3o3cu1skogg2b440aobsjabkl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
