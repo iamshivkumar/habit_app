@@ -6,7 +6,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:habit_app/root.dart';
 import 'package:habit_app/ui/auth/providers/auth_provider.dart';
+import 'package:habit_app/ui/auth/reset_password_page.dart';
 import 'package:habit_app/ui/auth/sign_up_page.dart';
+import 'package:habit_app/ui/auth/widgets/email_field.dart';
+import 'package:habit_app/ui/auth/widgets/facebook_button.dart';
+import 'package:habit_app/ui/auth/widgets/google_button.dart';
 import 'package:habit_app/ui/components/big_button.dart';
 import 'package:habit_app/ui/components/loading_layer.dart';
 import 'package:habit_app/utils/assets.dart';
@@ -15,6 +19,7 @@ import 'package:habit_app/utils/validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../components/app_snackbar.dart';
+import 'widgets/password_field.dart';
 
 class LoginPage extends HookConsumerWidget {
   const LoginPage({super.key});
@@ -68,30 +73,10 @@ class LoginPage extends HookConsumerWidget {
                     ),
                     const SizedBox(height: 40),
                     ...[
-                      ElevatedButton.icon(
-                        onPressed: () async {
-                          try {
-                            await model.signInWithGoogle();
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, Root.route, (route) => false);
-                          } catch (e) {}
-                        },
-                        icon: SvgPicture.asset(
-                          Assets.google,
-                          width: 24,
-                          height: 24,
-                        ),
-                        label: const Text(Labels.continueWithGoogle),
-                      ),
+                      const GoogleButton(isLogin: true),
                       const SizedBox(height: 8),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          Assets.facebook,
-                          width: 24,
-                          height: 24,
-                        ),
-                        label: const Text(Labels.continueWithFacebook),
+                      FacebookButton(
+                        isLogin: true,
                       ),
                     ]
                         .map(
@@ -135,44 +120,14 @@ class LoginPage extends HookConsumerWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
                                     children: [
-                                      TextFormField(
-                                        keyboardType: TextInputType.emailAddress,
-                                        initialValue: model.email,
-                                        style: TextStyle(
-                                          color: scheme.primary,
-                                        ),
-                                        decoration: InputDecoration(
-                                          hintText: Labels.email,
-                                          prefixIcon: Icon(Icons.email_outlined),
-                                        ),
-                                        validator: Validators.validateEmail,
-                                        onChanged: (value) => model.email = value,
-                                      ),
+                                      EmailField(),
                                       SizedBox(height: 8),
-                                      TextFormField(
-                                        obscureText: true,
-                                        initialValue: model.password,
-                                        style: TextStyle(
-                                          color: scheme.primary,
-                                        ),
-                                        decoration: InputDecoration(
-                                          hintText: Labels.password,
-                                          prefixIcon: Icon(Icons.lock_outline),
-                                          suffix: Text(
-                                            Labels.show,
-                                            style: TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                        onChanged: (value) =>
-                                            model.password = value,
-                                      ),
+                                      PasswordField(),
                                       const SizedBox(height: 20),
                                       Consumer(
                                         builder: (context, ref, child) {
-                                          ref.watch(authProvider.select((value) => value.loginEnabled));
+                                          ref.watch(authProvider.select(
+                                              (value) => value.loginEnabled));
                                           return BigButton(
                                             onPressed: model.loginEnabled
                                                 ? () async {
@@ -185,7 +140,8 @@ class LoginPage extends HookConsumerWidget {
                                                             .pushNamedAndRemoveUntil(
                                                                 context,
                                                                 Root.route,
-                                                                (route) => false);
+                                                                (route) =>
+                                                                    false);
                                                       } catch (e) {
                                                         AppSnackBar.error(
                                                             context, e);
@@ -198,11 +154,22 @@ class LoginPage extends HookConsumerWidget {
                                         },
                                       ),
                                       const SizedBox(height: 12),
-                                      Text(
-                                        Labels.forgotPassword,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          decoration: TextDecoration.underline,
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ResetPasswordPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          Labels.forgotPassword,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: 12),

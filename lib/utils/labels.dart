@@ -75,6 +75,7 @@ class Labels {
   static const String startThisHabit = "Start this habit";
   static const String ullamco =
       "ullamco laboris nisi ut aliquip ex ea commodo\nconsequat dolore.";
+  static  String verificationEmail(String email)  => 'Verification email has been sent to $email. Please verify your email address to continue.';
   static const List<String> weCanHelpYou = [
     "We can ",
     "help you ",

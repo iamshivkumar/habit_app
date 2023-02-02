@@ -45,6 +45,8 @@ dependencies:
   google_sign_in: ^5.4.4
   email_validator: ^2.1.17
   shared_preferences: ^2.0.17
+  flutter_facebook_auth: ^5.0.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
