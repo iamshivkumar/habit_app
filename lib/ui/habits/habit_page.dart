@@ -176,7 +176,9 @@ class HabbitPage extends StatelessWidget {
                                 padding: EdgeInsets.all(4.0),
                                 child: AspectRatio(
                                   aspectRatio: 1,
-                                  child: StatusButton(),
+                                  child: StatusButton(
+                                    value: 1,
+                                  ),
                                 ),
                               )
                             ],

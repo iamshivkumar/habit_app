@@ -15,6 +15,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../utils/labels.dart';
 import '../components/circle_button.dart';
 
+
+
+
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
@@ -185,6 +188,7 @@ class HomePage extends ConsumerWidget {
                               7,
                               (index) => const StatusButton(
                                 size: 54,
+                                value: 1,
                               ),
                             ),
                           ),

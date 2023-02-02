@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatelessWidget {
-  const CustomSwitch({super.key, this.value = false});
+  const CustomSwitch({super.key, this.value = false,this.onSwitch});
 
   final bool value;
+  final VoidCallback? onSwitch;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -33,7 +34,7 @@ class CustomSwitch extends StatelessWidget {
             activeColor: Colors.transparent,
             value: value,
             trackColor: Colors.transparent,
-            onChanged: (v) {},
+            onChanged: (v) => onSwitch?.call(),
             thumbColor: value ? scheme.primary : scheme.onPrimary,
           ),
         ],

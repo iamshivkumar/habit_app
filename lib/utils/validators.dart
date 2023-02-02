@@ -5,4 +5,8 @@ class Validators {
 
     return  EmailValidator.validate(value??'') ? null : 'Please enter a valid email';
   }
+
+  static String? required(String? value) {
+    return value?.isNotEmpty == true ? null : 'Required!';
+  }
 }

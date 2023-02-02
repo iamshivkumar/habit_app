@@ -6,9 +6,10 @@ import '../home/widgets/half_cliper.dart';
 
 
 class StatusButton extends StatelessWidget {
-  const StatusButton({super.key, this.size});
+  const StatusButton({super.key, this.size,required this.value});
   
   final double? size;
+  final int value;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -22,10 +23,10 @@ class StatusButton extends StatelessWidget {
         color: scheme.primary.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Padding(
+      child: value==0?null: Padding(
         padding: const EdgeInsets.all(2.0),
         child: ClipPath(
-          clipper: HalfCliper(),
+          clipper: value==1? HalfCliper():null,
           child: Container(
             decoration: BoxDecoration(
               color: scheme.primary,

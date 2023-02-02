@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:habit_app/ui/home/home_page.dart';
+import 'package:habit_app/ui/home/home_root.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../utils/assets.dart';
 import '../habits/write_habit_page.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends ConsumerWidget {
   const Dashboard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const WriteHabitPage(),
-            ),
-          );
+          ref.read(writerProvider.notifier).state = true;
         },
         child: SvgPicture.asset(
           Assets.addIcon,
@@ -73,7 +70,7 @@ class Dashboard extends StatelessWidget {
         ),
       ),
       body: [
-        const HomePage(),
+        const HomeRoot(),
       ][0],
     );
   }
