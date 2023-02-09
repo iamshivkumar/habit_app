@@ -8,6 +8,7 @@ final habitRepositoryProvider = Provider<HabitRepository>((ref) {
 });
 
 class HabitRepository {
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> writeHabit(Habit habit) async {
@@ -17,6 +18,16 @@ class HabitRepository {
         .set(
           habit.toMap(),
           SetOptions(merge: true),
+        );
+  }
+
+  Stream<List<Habit>> getHabits(String uid) {
+    return _firestore.collection('habits').where('createdBy',isEqualTo:uid ).snapshots().map(
+          (snapshot) => snapshot.docs
+              .map(
+                (doc) => Habit.fromMap(doc),
+              )
+              .toList(),
         );
   }
 }

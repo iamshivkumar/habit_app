@@ -49,7 +49,7 @@ class AddReminderSheet extends ConsumerWidget {
                     void toggle(){
                       model.toggleReminder(e);
                     }
-                    final value = model.reminders.contains(e);
+                    final value = model.initial.reminders.contains(e);
                     return TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: value

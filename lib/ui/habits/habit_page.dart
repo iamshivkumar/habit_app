@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:habit_app/core/models/habit.dart';
 import 'package:habit_app/ui/auth/reset_password_page.dart';
 import 'package:habit_app/ui/components/app_back_button.dart';
 import 'package:habit_app/ui/components/big_button.dart';
 import 'package:habit_app/ui/components/custom_scaffold.dart';
 import 'package:habit_app/ui/components/status_button.dart';
 import 'package:habit_app/ui/habits/widgets/congrats_sheet.dart';
+import 'package:habit_app/ui/home/home_root.dart';
 import 'package:habit_app/utils/formats.dart';
 import 'package:habit_app/utils/labels.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../utils/assets.dart';
 import '../../utils/utils.dart';
 import '../components/circle_button.dart';
 
-class HabbitPage extends StatelessWidget {
-  const HabbitPage({super.key});
+class HabbitPage extends ConsumerWidget {
+  const HabbitPage({super.key,required this.habit});
+  static const route = '/habbit';
 
+  final Habit habit;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final theme = Theme.of(context);
     final style = theme.textTheme;
     final scheme = theme.colorScheme;
-    print(Utils.allDaysOfMonth(DateTime.now()));
     return CustomScaffold(
-      title: Labels.readABook,
+      title: habit.name,
       leading: const AppBackButton(),
-      traling: const CircleButton(
+      traling:  CircleButton(
+        onPressed: () {
+          ref.read(writerProvider.notifier).state = true;
+        },
         child: Icon(
           Icons.edit_outlined,
         ),
@@ -63,7 +70,7 @@ class HabbitPage extends StatelessWidget {
                         children: [
                           const Spacer(flex: 2),
                           Text(
-                            Labels.readABook,
+                            habit.name,
                             style: style.titleMedium,
                           ),
                           const Spacer(flex: 2),

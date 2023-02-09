@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:habit_app/utils/formats.dart';
 
 class Habit {
-  final String id;
-  final String name;
-  final Map<String, int> frequency;
-  final List<TimeOfDay> reminders;
-  final bool notification;
-  final DateTime createdAt;
-  final String createdBy;
+   String id;
+   String name;
+   Map<String, int> frequency;
+   List<TimeOfDay> reminders;
+   bool notification;
+   DateTime createdAt;
+   String createdBy;
 
   Habit({
     required this.id,
@@ -51,33 +51,33 @@ class Habit {
     );
   }
 
-  Habit copyWith({
-    String? id,
-    String? name,
-    Map<String, int>? frequency,
-    List<TimeOfDay>? reminders,
-    bool? notification,
-    DateTime? createdAt,
-    String? createdBy,
-  }) {
-    return Habit(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      frequency: frequency ?? this.frequency,
-      reminders: reminders ?? this.reminders,
-      notification: notification ?? this.notification,
-      createdAt: createdAt ?? this.createdAt,
-      createdBy: createdBy ?? this.createdBy,
-    );
-  }
+  // Habit copyWith({
+  //   String? id,
+  //   String? name,
+  //   Map<String, int>? frequency,
+  //   List<TimeOfDay>? reminders,
+  //   bool? notification,
+  //   DateTime? createdAt,
+  //   String? createdBy,
+  // }) {
+  //   return Habit(
+  //     id: id ?? this.id,
+  //     name: name ?? this.name,
+  //     frequency: frequency ?? this.frequency,
+  //     reminders: reminders ?? this.reminders,
+  //     notification: notification ?? this.notification,
+  //     createdAt: createdAt ?? this.createdAt,
+  //     createdBy: createdBy ?? this.createdBy,
+  //   );
+  // }
 
   
 
-  factory Habit.empty() {
+  factory Habit.empty(Map<String, int> fr) {
     return Habit(
       id: '',
       name: '',
-      frequency: {},
+      frequency: fr,
       reminders: [],
       notification: false,
       createdAt: DateTime.now(),

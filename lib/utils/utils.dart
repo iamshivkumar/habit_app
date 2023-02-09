@@ -7,6 +7,8 @@ class Utils {
         },
       );
 
+
+
   static List<DateTime> allDaysOfMonth(DateTime month) {
     final firstDayOfMonth = DateTime(month.year, month.month, 1);
     final lastDayOfMonth = DateTime(month.year, month.month + 1, 0);
@@ -29,4 +31,5 @@ class Utils {
     } while (days.last != lastDay);
     return days;
   }
+  
 }
